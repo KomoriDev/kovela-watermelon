@@ -16,82 +16,256 @@
       }
     ]
   },
-  "links": [],
+  "links": [
+    {
+      "title": "官群",
+      "url": "https://qm.qq.com/q/3DtmHbMrwk",
+      "icon": "chat-circle"
+    },
+    {
+      "title": "请杯咖啡",
+      "url": "https://afdian.com/a/komoridev",
+      "icon": "link-simple"
+    }
+  ],
   "downloads": {
     "xmb10": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb10.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     },
     "xmb10nfc": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb10nfc.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     },
     "xmb10p": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb10p.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     },
     "xmb11": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb11.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     },
     "xmb11nfc": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb11nfc.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     },
     "xmb9": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb9.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     },
     "xmb9p": {
-      "version": "1.0.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.0.0.rpk",
-      "versionCode": 1,
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmb9p.rpk",
+      "versionCode": 2,
       "updatelogs": [
         {
           "version": "1.0.0",
           "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmrw6": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmrw6.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmrw5": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmrw5.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmrw5xring": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmrw5xring.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmws5": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmws5.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmws541": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmws541.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmws4": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmws4.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmws441": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmws441.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmws4xring": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmws4xring.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
+        }
+      ]
+    },
+    "xmws3": {
+      "version": "1.1.0",
+      "file_name": "downloads/com.komoridev.watermelon.debug.1.1.0-xmws3.rpk",
+      "versionCode": 2,
+      "updatelogs": [
+        {
+          "version": "1.0.0",
+          "content": "- 🎉 Hello Astrobox"
+        },
+        {
+          "version": "1.1.0",
+          "content": "- 📱 支持圆形、矩形和胶囊形屏幕，适配更多 Vela 设备\n- ⚡️ 优化高分局性能"
         }
       ]
     }
