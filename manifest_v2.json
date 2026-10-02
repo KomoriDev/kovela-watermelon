@@ -3,9 +3,11 @@
     "id": "com.komoridev.watermelon",
     "restype": "quick_app",
     "name": "合成大西瓜",
-    "description": "适配 Xiaomi Vela 手环的合成大西瓜游戏",
+    "description": "合成大西瓜\n\n为小米穿戴设备定制的合成大西瓜游戏，完美适配各个设备比例。共 11 种水果，空间有限，需要规划落点、制造连击，避免溢出。",
     "preview": [
-      "media/Screenshot_1790352755.png"
+      "media/screenshot1.png",
+      "media/screenshot2.png",
+      "media/screenshot3.png"
     ],
     "icon": "media/logo.png",
     "cover": "media/容器 1.png",
