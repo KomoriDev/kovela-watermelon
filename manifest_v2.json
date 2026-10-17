@@ -32,9 +32,9 @@
   ],
   "downloads": {
     "xmb10": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb10.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb10.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -47,13 +47,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmb10nfc": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb10nfc.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb10nfc.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -66,13 +70,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmb10p": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb10p.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb10p.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -85,13 +93,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmb11": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb11.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb11.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -104,13 +116,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmb11nfc": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb11nfc.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb11nfc.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -123,13 +139,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmb9": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb9.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb9.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -142,13 +162,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmb9p": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmb9p.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmb9p.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -161,13 +185,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmrw6": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmrw6.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmrw6.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -180,13 +208,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmrw5": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmrw5.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmrw5.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -199,13 +231,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmrw5xring": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmrw5xring.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmrw5xring.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -218,13 +254,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmws5": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmws5.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmws5.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -237,13 +277,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmws541": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmws541.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmws541.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -256,13 +300,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmws4": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmws4.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmws4.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -275,13 +323,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmws441": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmws441.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmws441.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -294,13 +346,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmws4xring": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmws4xring.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmws4xring.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -313,13 +369,17 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     },
     "xmws3": {
-      "version": "1.1.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.1.1-xmws3.rpk",
-      "versionCode": 3,
+      "version": "1.2.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0-xmws3.rpk",
+      "versionCode": 4,
       "updatelogs": [
         {
           "version": "1.0.0",
@@ -332,6 +392,10 @@
         {
           "version": "1.1.1",
           "content": "- ⚡️优化水果资源与页面动态更新"
+        },
+        {
+          "version": "1.2.0",
+          "content": "- 🍉 独立 AstroBox V4 换肤插件，两套内置皮肤免费使用\n- 📲 手环图片传输、预览与恢复默认全部免费\n- 🎨 自定义图片在插件内按爱发电绑定账号验证，旧购买商品继续有效"
         }
       ]
     }

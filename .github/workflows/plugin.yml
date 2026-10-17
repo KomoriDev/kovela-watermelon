@@ -1,0 +1,39 @@
+name: Package Watermelon V4
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["plugin/**", "scripts/**", "wearable/**", "package.json", "package-lock.json", ".github/workflows/plugin.yml"]
+  pull_request:
+    paths: ["plugin/**", "scripts/**", "wearable/**", "package.json", "package-lock.json", ".github/workflows/plugin.yml"]
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: plugin
+      - run: npm ci
+      - run: npm run prepare:skins
+      - run: npm test
+      - run: cargo test --locked
+        working-directory: plugin
+      - run: npm run build:plugin
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Kovela-Watermelon
+          path: plugin/dist/watermelon/
+          if-no-files-found: error

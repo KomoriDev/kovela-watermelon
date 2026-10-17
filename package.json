@@ -1,0 +1,19 @@
+{
+  "name": "kovela-watermelon",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AstroBox V4 合成大西瓜换肤工具与免费手环传输模块",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "prepare:skins": "node scripts/prepare-skins.mjs",
+    "prepare:vela": "node scripts/prepare-vela.mjs",
+    "stage:game": "node scripts/stage-game.mjs",
+    "build:plugin": "python plugin/package.py",
+    "test": "node --test wearable/test/*.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.9",
+    "sharp": "0.35.4"
+  }
+}

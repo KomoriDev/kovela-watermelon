@@ -1,0 +1,24 @@
+[package]
+name = "kovela-watermelon"
+version = "1.0.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+futures-util = { version = "0.3.34", default-features = false, features = ["async-await"] }
+wit-bindgen = { version = "0.57.1", features = ["async", "async-spawn"] }
+waki = "0.5.1"
+base64 = "0.22.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+image = { version = "0.25.10", default-features = false, features = ["png", "jpeg", "webp", "bmp", "gif"] }
+color_quant = "2.0.0"
+crc32fast = "1.5"
+
+[profile.release]
+lto = true
+opt-level = "s"
+strip = "debuginfo"

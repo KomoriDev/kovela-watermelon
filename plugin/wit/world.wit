@@ -1,0 +1,15 @@
+package kovela:watermelon;
+
+world watermelon {
+  import astrobox:psys-host-v4/ui;
+  import astrobox:psys-host-v4/device;
+  import astrobox:psys-host-v4/dialog;
+  import astrobox:psys-host-v4/account;
+  import astrobox:psys-host-v4/register;
+  import astrobox:psys-host-v4/timer;
+  import astrobox:psys-host-v4/interconnect;
+  import astrobox:psys-host-v4/thirdpartyapp;
+
+  export astrobox:psys-plugin-v4/lifecycle;
+  export astrobox:psys-plugin-v4/event;
+}

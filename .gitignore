@@ -1,0 +1,7 @@
+node_modules/
+plugin/target/
+.verify/
+.env
+.env.*
+*.local
+__pycache__/
