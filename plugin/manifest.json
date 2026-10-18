@@ -1,7 +1,7 @@
 {
   "name": "合成大西瓜自定义工具",
   "icon": "icon.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "为手环上的合成大西瓜更换水果皮肤",
   "author": "KomoriDev",
   "website": "https://github.com/KomoriDev/kovela-watermelon",
