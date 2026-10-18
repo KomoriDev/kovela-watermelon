@@ -32,10 +32,14 @@
   ],
   "downloads": {
     "xmb10": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -55,10 +59,14 @@
       ]
     },
     "xmb10nfc": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -78,10 +86,14 @@
       ]
     },
     "xmb10p": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -101,10 +113,14 @@
       ]
     },
     "xmb11": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -124,10 +140,14 @@
       ]
     },
     "xmb11nfc": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -147,10 +167,14 @@
       ]
     },
     "xmb9": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -170,10 +194,14 @@
       ]
     },
     "xmb9p": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -193,10 +221,14 @@
       ]
     },
     "xmrw6": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -216,10 +248,14 @@
       ]
     },
     "xmrw5": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -239,10 +275,14 @@
       ]
     },
     "xmrw5xring": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -262,10 +302,14 @@
       ]
     },
     "xmws5": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -285,10 +329,14 @@
       ]
     },
     "xmws541": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -308,10 +356,14 @@
       ]
     },
     "xmws4": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -331,10 +383,14 @@
       ]
     },
     "xmws441": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -354,10 +410,14 @@
       ]
     },
     "xmws4xring": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
@@ -377,10 +437,14 @@
       ]
     },
     "xmws3": {
-      "version": "1.2.0",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.0.rpk",
-      "versionCode": 4,
+      "version": "1.2.1",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
+      "versionCode": 5,
       "updatelogs": [
+        {
+          "version": "1.2.1",
+          "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
+        },
         {
           "version": "1.2.0",
           "content": "- 🎨 新增经典、Q版两套免费皮肤，支持 11 种水果独立换图与恢复默认\n- ✨ 新增对局存档，暂停返回或切后台可继续上局；最高分仅在本局结束时记录\n- 💸 手环图片传输、保存与恢复默认全部免费，自定义导入按爱发电权益验证\n- ⚡️ 碰撞检测分区与接触复用、静止休眠，降低水果堆积和合成时的负载\n- ⚡️ 画面约 20 帧刷新，水果图片元素循环复用，资源改为 LVGL I8 `.bin`\n- 🐛 修复弧形屏底部水果堆持续抖动\n- 🐛 修复水果图片页预览读取失败、一直读取中及重进后丢失\n- 🐛 修复默认水果图片边缘平边与角落残留像素"
