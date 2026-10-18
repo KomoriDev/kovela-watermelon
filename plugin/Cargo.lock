@@ -351,6 +351,7 @@ dependencies = [
  "crc32fast",
  "futures-util",
  "image",
+ "png",
  "serde",
  "serde_json",
  "uuid",

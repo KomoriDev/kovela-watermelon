@@ -25,7 +25,9 @@ export function createSkins({file, interconnect}) {
           if(current!==generation) return;
           send({v:1,id:value.id,type:"device",productId:PRODUCT,
             images:{v:1,freeTransfer:true,sizes:IMAGE_SIZES,maxBytes:IMAGE_MAX_BYTES,chunkBytes:IMAGE_CHUNK_BYTES,
-              customLevels:images.snapshot().levels,preview:true}});
+              customLevels:images.snapshot().levels,preview:true,
+              // png：设备不支持 LVGL v9 .bin（小米手环 9/9 Pro），插件需传 PNG。旧插件忽略此字段。
+              format:images.format()}});
         }
         if(images.snapshot().ready) reply(); else images.load(reply);
       } else images.receive(value,send);

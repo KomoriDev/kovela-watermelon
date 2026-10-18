@@ -45,7 +45,9 @@ npm run build:plugin
 
 插件支持 PNG、JPEG、WebP、BMP、GIF 首帧，自动校正方向、居中裁剪、圆形透明遮罩与 I8 量化。输入上限 8 MiB、边长上限 8192、解码内存上限 64 MiB。
 
-手环继续使用 `internal://files/watermelon-images.json` 和 `watermelon-image-<id>-<level>.bin`，已有图片无需迁移。索引加载、预览回读、迟到回调与中断文件回收保留原来的恢复逻辑。
+小米手环 9/9 Pro 不支持 LVGL v9 `.bin`。游戏启动时用一张 1×1 探测图判断，握手回复 `images.format`：`png` 表示只能显示 PNG，缺省或 `bin` 按原方式处理。对 `png` 设备，插件把整套皮肤和自定义图片先量化成同一份 I8 调色板，再无损编码为 8 位调色板 PNG（像素与 `.bin` 一致，同样不超过 40 KiB），`image-begin` 带 `format: "png"`；预览回读的 `image-preview` 也带 `format`。`png` 设备拒绝不带格式的 `.bin` 上传（`UNSUPPORTED_FORMAT`），旧的 `.bin` 自定义图在这类设备上按默认图处理但不删除。`.bin` 设备也能接收和显示 PNG。
+
+手环继续使用 `internal://files/watermelon-images.json` 和 `watermelon-image-<id>-<level>.bin`（PNG 为 `.png`，索引条目带 `format: "png"`），已有图片无需迁移。索引加载、预览回读、迟到回调与中断文件回收保留原来的恢复逻辑。
 
 插件不向手环推送任何通知（真机上 AstroBox 推送的通知会让手环整机重启），传输进度、失败原因与完成状态只在插件页显示。
 

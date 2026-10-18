@@ -303,3 +303,68 @@ test("watchdog releases a load stalled on a missing header callback and a later 
   assert.equal(reply.success, true);
   assert.equal(Buffer.from(reply.data, "base64url").length, 1536);
 });
+
+function png(size = 24, length = 300) {
+  const bytes = Buffer.alloc(length);
+  bytes.set([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82]);
+  bytes.writeUInt32BE(size, 16); bytes.writeUInt32BE(size, 20);
+  bytes.set([8, 3, 0, 0, 0], 24);
+  return bytes;
+}
+function beginPng(e, bytes, id, target) {
+  return e.request({type: "image-begin", id, level: 0, format: "png", width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20),
+    length: bytes.length, crc32: crc32(bytes).toString(16).padStart(8, "0")}, target);
+}
+
+test("PNG devices (Band 9/9 Pro) install, reload and preview PNG images", async () => {
+  const e = environment(), bytes = png();
+  e.store.setFormat("png");
+  assert.equal(e.store.snapshot().format, "png");
+  assert.equal(beginPng(e, bytes, ID).success, true);
+  chunks(e, bytes, ID);
+  assert.equal(e.request({type: "image-commit", id: ID, level: 0}).success, true);
+  const source = e.store.source(0);
+  assert.match(source, /^internal:\/\/files\/watermelon-image-image-test-00000001-0\.png$/);
+  assert.deepEqual(e.files.get(source), bytes);
+  const reboot = e.open();
+  reboot.setFormat("png");
+  assert.equal(reboot.source(0), source);
+  const reply = e.request({type: "image-read", id: NEXT, level: 0, offset: 0}, reboot);
+  assert.equal(reply.success, true);
+  assert.equal(reply.format, "png");
+  assert.deepEqual(Buffer.from(reply.data, "base64url"), bytes);
+});
+
+test("PNG devices reject .bin uploads and ignore old .bin images", async () => {
+  const e = environment(), bin = await image();
+  begin(e, bin, ID); chunks(e, bin, ID); e.request({type: "image-commit", id: ID, level: 0});
+  const old = e.store.source(0);
+  e.store.setFormat("png");
+  assert.equal(e.store.source(0), "/common/fruit-1.bin", "旧 .bin 在不支持的设备上按默认图处理");
+  assert.deepEqual(e.store.snapshot().levels, []);
+  assert.equal(e.request({type: "image-read", id: NEXT, level: 0, offset: 0}).default, true);
+  assert.equal(begin(e, bin, NEXT).error, "UNSUPPORTED_FORMAT");
+  assert.equal(e.files.has(old), true, "不能删除旧图片文件");
+  e.store.setFormat("bin");
+  assert.equal(e.store.source(0), old);
+});
+
+test("PNG uploads validate the signature and size limits", async () => {
+  const e = environment();
+  e.store.setFormat("png");
+  assert.equal(e.request({type: "image-begin", id: ID, level: 0, format: "png", width: 24, height: 24, length: 40961, crc32: "12345678"}).error, "INVALID_IMAGE");
+  const bytes = png();
+  beginPng(e, bytes, ID);
+  const broken = Buffer.from(bytes); broken[1] = 0;
+  assert.equal(e.request({type: "image-chunk", id: ID, level: 0, offset: 0, data: broken.toString("base64url")}).error, "INVALID_IMAGE");
+  const wrongSize = png(30);
+  assert.equal(beginPng(e, wrongSize, NEXT).success, true);
+  assert.equal(e.request({type: "image-chunk", id: NEXT, level: 0, offset: 0, data: png(24).toString("base64url")}).error, "INVALID_IMAGE");
+});
+
+test("bin devices also accept PNG uploads", async () => {
+  const e = environment(), bytes = png();
+  beginPng(e, bytes, ID); chunks(e, bytes, ID);
+  assert.equal(e.request({type: "image-commit", id: ID, level: 0}).success, true);
+  assert.match(e.store.source(0), /\.png$/);
+});

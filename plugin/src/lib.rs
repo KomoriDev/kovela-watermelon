@@ -51,6 +51,8 @@ struct State {
     current: [Option<String>; 11],
     read_failed: [bool; 11],
     readable: bool,
+    /// 当前手环要接收的图片格式；小米手环 9/9 Pro 为 PNG。
+    format: images::Format,
     read: Option<images::PreviewRead>,
     transfer: Option<images::Transfer>,
     transfer_preview: Option<String>,
@@ -672,14 +674,14 @@ async fn pick_image(verify_first: bool) {
         },
     )
     .await;
-    let level = STATE.with(|state| {
+    let (level, format) = STATE.with(|state| {
         let mut s = state.borrow_mut();
         s.picking = false;
-        s.level
+        (s.level, s.format)
     });
     match result {
         Ok(file) if file.data.is_empty() => render(),
-        Ok(file) => match images::convert(&file.data, level) {
+        Ok(file) => match images::convert(&file.data, level, format) {
             Ok(image) => {
                 STATE.with(|state| {
                     let mut s = state.borrow_mut();
@@ -701,10 +703,13 @@ fn next_transfer(s: &mut State) {
         return;
     };
     let level = batch.completed;
-    let image = batch.skin.map(|i| images::Converted {
-        bytes: skins::SKINS[i].fruits[level].to_vec(),
-        width: images::SIZES[level],
-        preview: String::new(),
+    let image = batch.skin.map(|i| {
+        images::Converted::indexed(
+            skins::SKINS[i].fruits[level].to_vec(),
+            String::new(),
+            s.format,
+        )
+        .expect("bundled skin image")
     });
     s.transfer_preview = batch.skin.map(|i| skins::preview(i, level).to_string());
     s.transfer = Some(images::Transfer::new(addr, level, image));
@@ -734,6 +739,11 @@ async fn apply_custom() {
         let mut s = state.borrow_mut();
         let addr = target(&s)?;
         let image = s.pending.take()?;
+        if image.format != s.format {
+            // 选图后换了手环：格式不符的图片不能发，请重新选择。
+            s.message = "手环已更换，请重新选择图片".into();
+            return None;
+        }
         s.message.clear();
         s.transfer_preview = Some(image.preview.clone());
         let level = s.level;
@@ -827,6 +837,11 @@ async fn receive(value: Value) {
             if compatible {
                 s.message = "手环已连接".into();
                 s.readable = value["images"]["preview"] == true;
+                let format = images::Format::from_value(&value["images"]["format"]);
+                if s.format != format {
+                    s.pending = None;
+                }
+                s.format = format;
                 s.custom = [false; 11];
                 if let Some(levels) = value["images"]["customLevels"].as_array() {
                     for level in levels
@@ -861,7 +876,7 @@ async fn receive(value: Value) {
                         s.custom[read.level] = false;
                         s.current[read.level] = None;
                     } else {
-                        match images::indexed_preview(&read.bytes) {
+                        match read.preview() {
                             Ok(preview) => s.current[read.level] = Some(preview),
                             Err(error) => {
                                 s.read_failed[read.level] = true;
