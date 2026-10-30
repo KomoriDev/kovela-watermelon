@@ -307,6 +307,53 @@ test("watchdog releases a load stalled on a missing header callback and a later 
   assert.equal(Buffer.from(reply.data, "base64url").length, 1536);
 });
 
+test("reloads that lose file callbacks keep installed images instead of flipping to built-ins", async () => {
+  const e = environment(), bytes = png();
+  begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
+  const store = createImageStore({file: e.file, loadTimeout: 15});
+  store.load();
+  const custom = store.source(0);
+  assert.match(custom, /watermelon-image-.*-0\.png$/);
+  assert.equal(store.snapshot().complete, true);
+  const {readText, readArrayBuffer} = e.file;
+  // 索引回调两轮都丢失：全部沿用上一轮。
+  e.file.readText = () => {};
+  let done = false;
+  store.load(() => { done = true; });
+  await until(() => done);
+  assert.equal(store.source(0), custom, "丢回调不能把自定义图换回内置图");
+  assert.equal(store.snapshot().complete, false);
+  // 索引读到但图片头回调丢失：索引里仍是同一文件，沿用。
+  e.file.readText = readText;
+  e.file.readArrayBuffer = () => {};
+  done = false;
+  store.load(() => { done = true; });
+  await until(() => done);
+  assert.equal(store.source(0), custom);
+  assert.deepEqual(e.files.get(custom), bytes, "沿用时不能把文件当孤儿删掉");
+  // 回调恢复后重读完整，标记为完整加载。
+  e.file.readArrayBuffer = readArrayBuffer;
+  store.load();
+  assert.equal(store.source(0), custom);
+  assert.equal(store.snapshot().complete, true);
+});
+
+test("a stalled reload still drops images that another page reset meanwhile", async () => {
+  const e = environment(), bytes = png();
+  begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
+  const game = createImageStore({file: e.file, loadTimeout: 15});
+  game.load();
+  assert.notEqual(game.source(0), "/common/fruit-1.png");
+  // 换肤页（另一份实例）把等级 0 恢复默认。
+  assert.equal(e.request({type: "image-reset", id: NEXT, level: 0}).success, true);
+  e.file.readArrayBuffer = () => {};
+  e.file.get = () => {};
+  let done = false;
+  game.load(() => { done = true; });
+  await until(() => done);
+  assert.equal(game.source(0), "/common/fruit-1.png");
+});
+
 test("PNG images install, reload and preview", async () => {
   const e = environment(), bytes = png();
   assert.equal(begin(e, bytes, ID).success, true);

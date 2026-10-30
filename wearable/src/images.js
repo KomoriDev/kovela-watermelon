@@ -51,6 +51,11 @@ export function createImageStore({ file, loadTimeout }) {
   let loadGeneration = 0;
   let loadTimer = null;
   let pendingEntries = {}
+  // 本轮加载中已得出明确结论（通过或明确失败）的等级，以及读到的索引内容。
+  // 看门狗收尾时，回调丢失、没来得及校验的等级据此决定是否沿用上一轮结果。
+  let checkedLevels = {};
+  let indexImages = null;
+  let complete = false;
   let transfer = null;
   let busy = false;
   let error = "";
@@ -64,7 +69,7 @@ export function createImageStore({ file, loadTimeout }) {
   const loadWaiters = [];
   function snapshot() {
     const levels = usableLevels();
-    return {ready, busy: busy || !!transfer, count: levels.length,
+    return {ready, complete, busy: busy || !!transfer, count: levels.length,
       levels, level: transfer ? transfer.level : changedLevel,
       progress: transfer ? Math.floor(transfer.offset * 100 / transfer.length) : 0, error};
   }
@@ -154,10 +159,12 @@ export function createImageStore({ file, loadTimeout }) {
       if (generation !== loadGeneration || !loading) return;
       if (!retrying) { beginLoad(true); return; }
       recovered = true;
+      keepUnchecked();
+      complete = false;
       finishLoad(generation);
     }, loadTimeout || 4000);
     // 重读时保留上一轮已校验的条目：两轮都丢回调也能按已有结果出结论。
-    if (!retrying) pendingEntries = {};
+    if (!retrying) { pendingEntries = {}; checkedLevels = {}; indexImages = null; }
     file.readText({uri: INDEX, success(result) {
       if (generation !== loadGeneration) return;
       let stored = {};
@@ -167,30 +174,47 @@ export function createImageStore({ file, loadTimeout }) {
         if (value.v !== 1 || !value.images || typeof value.images !== "object") throw new Error("index");
         stored = value.images;
       } catch (_) { stored = {}; }
+      indexImages = stored;
       let level = 0;
       function readNext() {
         if (generation !== loadGeneration) return;
-        if (level === IMAGE_SIZES.length) { finishLoad(generation); return; }
+        if (level === IMAGE_SIZES.length) { complete = true; finishLoad(generation); return; }
         const slot = level++;
+        // 回调（成功或明确失败）到达即视为本等级已有结论。
+        function settle() { if (generation !== loadGeneration) return; checkedLevels[slot] = true; readNext(); }
         const entry = stored[slot];
         if (!entry || entry.format !== "png" || !validId(entry.id) || entry.uri !== imageUri(entry.id, slot) ||
             entry.width !== entry.height || !(entry.width > 0 && entry.width <= IMAGE_SIZES[slot]) ||
-            !validLength(entry.length)) { readNext(); return; }
+            !validLength(entry.length)) { settle(); return; }
         file.get({uri: entry.uri, success(info) {
           if (generation !== loadGeneration) return;
-          if (info.length !== entry.length) { readNext(); return; }
+          if (info.length !== entry.length) { settle(); return; }
           file.readArrayBuffer({uri: entry.uri, length: 24, success(data) {
             if (generation !== loadGeneration) return;
             if (validPngHeader(data.buffer, entry.width, entry.height, entry.length)) pendingEntries[slot] = entry;
-            readNext();
-          }, fail: readNext});
-        }, fail: readNext});
+            settle();
+          }, fail: settle});
+        }, fail: settle});
       }
       readNext();
     }, fail() {
       if (generation !== loadGeneration) return;
-      pendingEntries = {}; finishLoad(generation);
+      pendingEntries = {}; complete = true; finishLoad(generation);
     }});
+  }
+  // 看门狗收尾：真机切后台、亮屏时文件回调会丢，丢回调不等于图片坏了。
+  // 之前直接用不完整的结果覆盖，已装好的自定义图会被换回内置图，下次重读成功又换回来，
+  // 表现为水果皮肤时有时无、交替出现。已有上一轮结果时，没得出结论的等级沿用上一轮：
+  // 索引都没读到就全部沿用；读到了则只沿用索引里仍是同一文件的等级（被重置或替换的不沿用）。
+  // 首次加载没有可信的旧结果，仍按已校验的条目出结论。
+  function keepUnchecked() {
+    if (!ready) return;
+    for (const level in entries) {
+      if (checkedLevels[level] || pendingEntries[level] || !usable(entries[level])) continue;
+      const old = entries[level];
+      const listed = indexImages ? indexImages[level] : null;
+      if (!indexImages || (listed && listed.uri === old.uri && listed.length === old.length)) pendingEntries[level] = old;
+    }
   }
   function reply(send, value, stage, success, extra) {
     send(Object.assign({v: 1, id: value.id, type: "image-result", stage, success}, extra || {}));
