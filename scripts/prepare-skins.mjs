@@ -19,27 +19,12 @@ function roundCut(rgba,size) {
     rgba[p+3]=alpha;if(alpha===0)rgba[p]=rgba[p+1]=rgba[p+2]=0;
   }
 }
-// LVGL v9 I8: index 0 is fully transparent, indices 1..255 come from libimagequant (via sharp), including
-// semi-transparent edge colours, so the anti-aliased rim survives quantization. Deterministic for fixed inputs.
+// Palette PNG (8-bit indexed + tRNS) from libimagequant via sharp, so the anti-aliased rim survives quantization.
+// Deterministic for fixed inputs. Every Vela device can decode PNG, unlike LVGL v9 `.bin`.
 async function indexed(rgba,width) {
-  const quantized=await sharp(await sharp(rgba,{raw:{width,height:width,channels:4}}).png({palette:true,colours:255,dither:0,effort:10}).toBuffer()).ensureAlpha().raw().toBuffer();
-  const bytes=Buffer.alloc(1036+width*width),lookup=new Map();
-  bytes.set([0x19,0x0a,0,0]);bytes.writeUInt16LE(width,4);bytes.writeUInt16LE(width,6);bytes.writeUInt16LE(width,8);
-  for(let i=0;i<width*width;i++) {
-    const p=i*4;if(quantized[p+3]===0)continue;
-    const key=quantized.readUInt32LE(p);let index=lookup.get(key);
-    if(index===undefined) {index=lookup.size+1;if(index>255)throw new Error("Palette overflow");lookup.set(key,index);bytes.set([quantized[p+2],quantized[p+1],quantized[p],quantized[p+3]],12+index*4);}
-    bytes[1036+i]=index;
-  }
-  return bytes;
+  return sharp(rgba,{raw:{width,height:width,channels:4}}).png({palette:true,colours:256,dither:0,effort:10,compressionLevel:9}).toBuffer();
 }
-// Preview PNG shows exactly what the device renders from the binary.
-function decoded(bin,width) {
-  const rgba=Buffer.alloc(width*width*4);
-  for(let i=0;i<width*width;i++) {const o=12+bin[1036+i]*4;rgba.set([bin[o+2],bin[o+1],bin[o],bin[o+3]],i*4);}
-  return rgba;
-}
-for(const set of sets) {
+const MAX_BYTES=40*1024;for(const set of sets) {
   const folder=path.join(root,set.id);await mkdir(path.join(folder,"source"),{recursive:true});
   for(let level=0;level<11;level++) {
     const size=sizes[level],stem=`fruit-${level+1}`;
@@ -53,10 +38,10 @@ for(const set of sets) {
     }
     const {data}=await pipeline.ensureAlpha().raw().toBuffer({resolveWithObject:true});
     roundCut(data,size);
-    const bin=await indexed(data,size);
-    await writeFile(path.join(folder,stem+".bin"),bin);
-    await sharp(decoded(bin,size),{raw:{width:size,height:size,channels:4}}).png().toFile(path.join(folder,stem+".png"));
+    const png=await indexed(data,size);
+    if(png.length>MAX_BYTES)throw new Error(`${set.id}/${stem}.png is ${png.length} B, over ${MAX_BYTES}`);
+    await writeFile(path.join(folder,stem+".png"),png);
   }
 }
 await writeFile(path.join(root,"catalog.json"),JSON.stringify({sizes,names,skins:sets},null,2)+"\n");
-console.log("Generated 2 complete free skins: 22 LVGL I8 binaries and previews.");
+console.log("Generated 2 complete free skins: 22 palette PNGs.");

@@ -24,15 +24,8 @@ function validId(id) {
 function validLevel(level) {
   return typeof level === "number" && level >= 0 && level < IMAGE_SIZES.length && Math.floor(level) === level;
 }
-export function validImageHeader(bytes, width, height, length) {
-  return bytes.length >= 12 && bytes[0] === 0x19 && bytes[1] === 0x0a &&
-    bytes[2] === 0 && bytes[3] === 0 && (bytes[4] & 255) + (bytes[5] & 255) * 256 === width &&
-    (bytes[6] & 255) + (bytes[7] & 255) * 256 === height && (bytes[8] & 255) + (bytes[9] & 255) * 256 === width &&
-    bytes[10] === 0 && bytes[11] === 0 && length === 12 + 1024 + width * height;
-}
-
 const PNG_SIGNATURE = [137, 80, 78, 71, 13, 10, 26, 10];
-// 小米手环 9/9 Pro 不支持 LVGL v9 .bin，这类设备接收调色板 PNG。PNG 最少要有签名和 IHDR。
+// 所有设备统一用调色板 PNG：LVGL v9 .bin 在小米手环 9/9 Pro 等设备上无法显示。PNG 最少要有签名和 IHDR。
 export function validPngHeader(bytes, width, height, length) {
   if (bytes.length < 24 || !(length >= 33 && length <= IMAGE_MAX_BYTES)) return false;
   for (let i = 0; i < 8; i += 1) if ((bytes[i] & 255) !== PNG_SIGNATURE[i]) return false;
@@ -40,24 +33,18 @@ export function validPngHeader(bytes, width, height, length) {
   return (bytes[12] & 255) === 73 && (bytes[13] & 255) === 72 && (bytes[14] & 255) === 68 && (bytes[15] & 255) === 82 &&
     word(16) === width && word(20) === height;
 }
-function formatOf(value) {
-  return value && value.format === "png" ? "png" : "bin";
+function validLength(length) {
+  return length >= 33 && length <= IMAGE_MAX_BYTES;
 }
-function validLength(format, width, height, length) {
-  return format === "png" ? length >= 33 && length <= IMAGE_MAX_BYTES : length === 1036 + width * height;
-}
-function validHeader(format, bytes, width, height, length) {
-  return format === "png" ? validPngHeader(bytes, width, height, length) : validImageHeader(bytes, width, height, length);
-}
-function imageUri(id, level, format) {
-  return PREFIX + id + "-" + level + (format === "png" ? ".png" : ".bin");
+function imageUri(id, level) {
+  return PREFIX + id + "-" + level + ".png";
 }
 
 export function createImageStore({ file, loadTimeout }) {
   let entries = {};
-  // 设备能显示的格式由游戏探测后设置；不支持 .bin 的设备上旧的 .bin 自定义图不再使用。
-  let format = "bin";
-  function usable(entry) { return !!entry && (format === "bin" || formatOf(entry) === "png"); }
+  // 旧版本存下的 .bin 自定义图（索引里没有 format: "png"）不再使用，回退到内置图，
+  // 文件由 recoverFiles 当作孤儿清理。
+  function usable(entry) { return !!entry && entry.format === "png"; }
   function usableLevels() { return Object.keys(entries).map(Number).filter(level => usable(entries[level])); }
   let ready = false;
   let loading = false;
@@ -78,7 +65,7 @@ export function createImageStore({ file, loadTimeout }) {
   function snapshot() {
     const levels = usableLevels();
     return {ready, busy: busy || !!transfer, count: levels.length,
-      levels, format, level: transfer ? transfer.level : changedLevel,
+      levels, level: transfer ? transfer.level : changedLevel,
       progress: transfer ? Math.floor(transfer.offset * 100 / transfer.length) : 0, error};
   }
   function publish() {
@@ -186,15 +173,15 @@ export function createImageStore({ file, loadTimeout }) {
         if (level === IMAGE_SIZES.length) { finishLoad(generation); return; }
         const slot = level++;
         const entry = stored[slot];
-        if (!entry || !validId(entry.id) || entry.uri !== imageUri(entry.id, slot, formatOf(entry)) ||
+        if (!entry || entry.format !== "png" || !validId(entry.id) || entry.uri !== imageUri(entry.id, slot) ||
             entry.width !== entry.height || !(entry.width > 0 && entry.width <= IMAGE_SIZES[slot]) ||
-            !validLength(formatOf(entry), entry.width, entry.height, entry.length)) { readNext(); return; }
+            !validLength(entry.length)) { readNext(); return; }
         file.get({uri: entry.uri, success(info) {
           if (generation !== loadGeneration) return;
           if (info.length !== entry.length) { readNext(); return; }
           file.readArrayBuffer({uri: entry.uri, length: 24, success(data) {
             if (generation !== loadGeneration) return;
-            if (validHeader(formatOf(entry), data.buffer, entry.width, entry.height, entry.length)) pendingEntries[slot] = entry;
+            if (validPngHeader(data.buffer, entry.width, entry.height, entry.length)) pendingEntries[slot] = entry;
             readNext();
           }, fail: readNext});
         }, fail: readNext});
@@ -231,14 +218,13 @@ export function createImageStore({ file, loadTimeout }) {
     if (busy || transfer) { fail("BUSY"); return; }
     const entry = entries[value.level];
     if (!usable(entry)) { send(Object.assign(base, {success: true, default: true})); return; }
-    const kind = formatOf(entry);
     if (typeof value.offset !== "number" || Math.floor(value.offset) !== value.offset ||
         value.offset < 0 || value.offset >= entry.length || value.offset % IMAGE_CHUNK_BYTES !== 0) {
       fail("OFFSET_MISMATCH"); return;
     }
     function deliver(bytes) {
       const chunk = bytes.subarray(value.offset, Math.min(entry.length, value.offset + IMAGE_CHUNK_BYTES));
-      send(Object.assign(base, {success: true, format: kind, width: entry.width, length: entry.length,
+      send(Object.assign(base, {success: true, format: "png", width: entry.width, length: entry.length,
         offset: value.offset, data: encodeBase64(chunk)}));
     }
     // 上一次读取如果在应用切后台时丢了文件回调，缓存会一直停在 bytes=null。
@@ -258,7 +244,7 @@ export function createImageStore({ file, loadTimeout }) {
       file.readArrayBuffer({uri: entry.uri, length: entry.length, success(result) {
         if (generation !== previewGeneration || preview !== current) return;
         const bytes = result.buffer instanceof Uint8Array ? result.buffer : new Uint8Array(result.buffer);
-        if (bytes.length !== entry.length || !validHeader(kind, bytes, entry.width, entry.height, entry.length)) {
+        if (bytes.length !== entry.length || !validPngHeader(bytes, entry.width, entry.height, entry.length)) {
           clearPreview(); fail("INVALID_IMAGE"); return;
         }
         current.bytes = bytes;
@@ -279,25 +265,24 @@ export function createImageStore({ file, loadTimeout }) {
     if (busy) return true;
     error = "";
     if (stage === "begin") {
-      const kind = formatOf(value);
-      // 不支持 .bin 的设备只收 PNG：旧插件发来的 .bin 装上也显示不出来。
-      if (format === "png" && kind !== "png") { reject(send, value, stage, "UNSUPPORTED_FORMAT"); return true; }
+      // 只收 PNG：.bin 在部分设备上显示不出来，旧插件发来的 .bin 一律拒绝。
+      if (value.format !== "png") { reject(send, value, stage, "UNSUPPORTED_FORMAT"); return true; }
       if (transfer && transfer.id === value.id && transfer.level === value.level) {
-        if (transfer.format !== kind || transfer.length !== value.length || transfer.crc32 !== value.crc32 || transfer.width !== value.width || transfer.height !== value.height) {
+        if (transfer.length !== value.length || transfer.crc32 !== value.crc32 || transfer.width !== value.width || transfer.height !== value.height) {
           reject(send, value, stage, "INVALID_IMAGE");
         } else reply(send, value, stage, true, {offset: transfer.offset});
         return true;
       }
       if (typeof value.width !== "number" || Math.floor(value.width) !== value.width || value.width <= 0 ||
           value.width > IMAGE_SIZES[value.level] || value.height !== value.width ||
-          !validLength(kind, value.width, value.height, value.length) || value.length > IMAGE_MAX_BYTES ||
+          !validLength(value.length) ||
           typeof value.crc32 !== "string" || !/^[0-9a-f]{8}$/.test(value.crc32)) {
         reject(send, value, stage, "INVALID_IMAGE"); return true;
       }
       busy = true;
       clearPreview();
       const previous = transfer;
-      transfer = {id: value.id, level: value.level, format: kind, width: value.width, height: value.height, length: value.length,
+      transfer = {id: value.id, level: value.level, width: value.width, height: value.height, length: value.length,
         crc32: value.crc32, crc: 0xffffffff, offset: 0, uri: "internal://cache/watermelon-image-" + value.id + ".part"};
       const current = transfer;
       function begin() {
@@ -348,7 +333,7 @@ export function createImageStore({ file, loadTimeout }) {
       }
       if (value.offset < current.offset) { reply(send, value, stage, true, {offset: current.offset}); return true; }
       if (value.offset !== current.offset) { reject(send, value, stage, "OFFSET_MISMATCH"); return true; }
-      if (current.offset === 0 && !validHeader(current.format, bytes, current.width, current.height, current.length)) {
+      if (current.offset === 0 && !validPngHeader(bytes, current.width, current.height, current.length)) {
         reject(send, value, stage, "INVALID_IMAGE"); return true;
       }
       busy = true;
@@ -366,12 +351,11 @@ export function createImageStore({ file, loadTimeout }) {
       reject(send, value, stage, "CHECKSUM_MISMATCH"); return true;
     }
     busy = true;
-    const destination = imageUri(current.id, current.level, current.format);
+    const destination = imageUri(current.id, current.level);
     const old = entries[current.level];
     file.move({srcUri: current.uri, dstUri: destination, success() {
       const next = Object.assign({}, entries);
-      next[current.level] = {id: current.id, uri: destination, width: current.width, height: current.height, length: current.length};
-      if (current.format === "png") next[current.level].format = "png";
+      next[current.level] = {id: current.id, uri: destination, width: current.width, height: current.height, length: current.length, format: "png"};
       saveIndex(next, current.id, function (success) {
         transfer = null;
         if (!success) {
@@ -413,14 +397,7 @@ export function createImageStore({ file, loadTimeout }) {
   }
   return {
     load, receive, cancel, snapshot,
-    format() { return format; },
-    setFormat(value) {
-      const next = value === "png" ? "png" : "bin";
-      if (next === format) return;
-      format = next;
-      publish();
-    },
-    source(level) { return usable(entries[level]) ? entries[level].uri : "/common/fruit-" + (level + 1) + ".bin"; },
+    source(level) { return usable(entries[level]) ? entries[level].uri : "/common/fruit-" + (level + 1) + ".png"; },
     subscribe(listener) { listeners.push(listener); listener(snapshot()); return function () { const i = listeners.indexOf(listener); if (i >= 0) listeners.splice(i, 1); }; },
   };
 }

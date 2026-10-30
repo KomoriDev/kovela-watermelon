@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createImageStore, validImageHeader } from "../src/images.js";
+import { createImageStore, validPngHeader } from "../src/images.js";
 import { crc32 } from "node:zlib";
 
 function environment() {
@@ -33,15 +33,17 @@ function environment() {
   }
   return {files, file, store, request, open, failCommit(value) { moveFailure = value; }};
 }
-async function image() {
-  const bytes = Buffer.alloc(1036 + 24 * 24);
-  bytes.set([0x19, 0x0a, 0, 0, 24, 0, 24, 0, 24, 0, 0, 0]);
-  bytes.set([20, 80, 200, 255], 16);
-  bytes.fill(1, 1036);
+// 手环只校验 PNG 签名与 IHDR 尺寸；默认 1612 字节，正好需要两块传输。
+function png(size = 24, length = 1612) {
+  const bytes = Buffer.alloc(length);
+  bytes.set([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82]);
+  bytes.writeUInt32BE(size, 16); bytes.writeUInt32BE(size, 20);
+  bytes.set([8, 3, 0, 0, 0], 24);
+  bytes.fill(1, 33);
   return bytes;
 }
-function begin(e, bytes, id, crc = crc32(bytes).toString(16).padStart(8, "0")) {
-  return e.request({type: "image-begin", id, level: 0, width: bytes.readUInt16LE(4), height: bytes.readUInt16LE(6), length: bytes.length, crc32: crc});
+function begin(e, bytes, id, crc = crc32(bytes).toString(16).padStart(8, "0"), target) {
+  return e.request({type: "image-begin", id, level: 0, format: "png", width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20), length: bytes.length, crc32: crc}, target);
 }
 function chunks(e, bytes, id) {
   for (let offset = 0; offset < bytes.length; offset += 1536) {
@@ -55,10 +57,10 @@ const ID = "image-test-00000001";
 const NEXT = "image-test-00000002";
 
 test("duplicate chunks and commit preserve one image through restart; reset removes it", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   assert.equal(begin(e, bytes, ID).success, true);
   chunks(e, bytes, ID);
-  assert.equal(e.store.source(0), "/common/fruit-1.bin");
+  assert.equal(e.store.source(0), "/common/fruit-1.png");
   const commit = {type: "image-commit", id: ID, level: 0};
   assert.equal(e.request(commit).success, true);
   assert.equal(e.request(commit).success, true);
@@ -67,12 +69,12 @@ test("duplicate chunks and commit preserve one image through restart; reset remo
   const reboot = e.open();
   assert.equal(reboot.source(0), source);
   assert.equal(e.request({type: "image-reset", id: NEXT, level: 0}, reboot).success, true);
-  assert.equal(reboot.source(0), "/common/fruit-1.bin");
+  assert.equal(reboot.source(0), "/common/fruit-1.png");
   assert.equal(e.files.has(source), false);
 });
 
 test("CRC mismatch and interrupted upload cannot replace current image", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const old = e.store.source(0);
   begin(e, bytes, NEXT, "00000000"); chunks(e, bytes, NEXT);
@@ -84,7 +86,7 @@ test("CRC mismatch and interrupted upload cannot replace current image", async (
 });
 
 test("index commit failure leaves old image and supports commit retry", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const old = e.store.source(0);
   begin(e, bytes, NEXT); chunks(e, bytes, NEXT);
@@ -98,33 +100,34 @@ test("index commit failure leaves old image and supports commit retry", async ()
 });
 
 test("oversized and invalid-header uploads are rejected before installation", async () => {
-  const e = environment(), bytes = await image();
-  assert.equal(e.request({type: "image-begin", id: ID, level: 0, width: 192, height: 192, length: 37900, crc32: "12345678"}).error, "INVALID_IMAGE");
+  const e = environment(), bytes = png();
+  assert.equal(e.request({type: "image-begin", id: ID, level: 0, format: "png", width: 192, height: 192, length: 37900, crc32: "12345678"}).error, "INVALID_IMAGE");
   begin(e, bytes, ID);
   const broken = Buffer.from(bytes); broken[0] = 0;
   assert.equal(e.request({type: "image-chunk", id: ID, level: 0, offset: 0, data: broken.subarray(0,1536).toString("base64url")}).error, "INVALID_IMAGE");
 });
 
 test("restart discards staging and orphan files without removing installed images or unrelated files", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const old = e.store.source(0);
   begin(e, bytes, NEXT);
   const part = "internal://cache/watermelon-image-" + NEXT + ".part";
   const staging = "internal://cache/watermelon-index-" + NEXT + ".json";
-  const orphan = "internal://files/watermelon-image-" + NEXT + "-0.bin";
+  const orphan = "internal://files/watermelon-image-" + NEXT + "-0.png";
+  const legacy = "internal://files/watermelon-image-" + NEXT + "-1.bin";
   const unrelated = "internal://files/user-picture.bin";
-  for (const uri of [staging, orphan, unrelated]) e.files.set(uri, bytes);
+  for (const uri of [staging, orphan, legacy, unrelated]) e.files.set(uri, bytes);
   const reboot = e.open();
   assert.equal(reboot.source(0), old);
   assert.deepEqual(e.files.get(old), bytes);
-  for (const uri of [part, staging, orphan]) assert.equal(e.files.has(uri), false);
+  for (const uri of [part, staging, orphan, legacy]) assert.equal(e.files.has(uri), false);
   assert.deepEqual(e.files.get(unrelated), bytes);
-  assert.equal(e.request({type: "image-begin", id: NEXT, level: 0, width: bytes[4], height: bytes[6], length: bytes.length, crc32: crc32(bytes).toString(16).padStart(8, "0")}, reboot).success, true);
+  assert.equal(begin(e, bytes, NEXT, undefined, reboot).success, true);
 });
 
 test("leaving during a chunk write cancels staging after its callback and releases queued reload", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const old = e.store.source(0);
   begin(e, bytes, NEXT);
@@ -145,7 +148,7 @@ test("leaving during a chunk write cancels staging after its callback and releas
 
 for (const operation of ["readText", "get", "readArrayBuffer", "list"]) {
   test("exit during " + operation + " reload abandons stale callbacks and permits reentry", async () => {
-    const e = environment(), bytes = await image();
+    const e = environment(), bytes = png();
     begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
     const original = e.file[operation];
     const abandoned = [];
@@ -174,7 +177,7 @@ for (const operation of ["readText", "get", "readArrayBuffer", "list"]) {
 }
 
 test("cancelled index callbacks cannot overwrite images installed after reentry", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const original = e.file.readText;
   let stale;
@@ -189,14 +192,14 @@ test("cancelled index callbacks cannot overwrite images installed after reentry"
   assert.equal(e.request({type: "image-read", id: NEXT, level: 0, offset: 0}).default, true);
 });
 
-test("192px indexed headers remain valid with signed native file bytes", () => {
-  const header = Int8Array.from([0x19, 0x0a, 0, 0, 192, 0, 192, 0, 192, 0, 0, 0]);
-  assert.equal(validImageHeader(header, 192, 192, 37900), true);
-  assert.equal(validImageHeader(header, 149, 149, 23237), false);
+test("192px PNG headers remain valid with signed native file bytes", () => {
+  const header = Int8Array.from(png(192).subarray(0, 24));
+  assert.equal(validPngHeader(header, 192, 192, 20000), true);
+  assert.equal(validPngHeader(header, 149, 149, 20000), false);
 });
 
 test("preview reads exact current image in bounded chunks and reports default after reset", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID);
   e.request({type: "image-commit", id: ID, level: 0});
   assert.deepEqual(e.store.snapshot().levels, [0]);
@@ -220,7 +223,7 @@ test("preview reads exact current image in bounded chunks and reports default af
 });
 
 test("lost preview callbacks are re-armed by the next request", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const original = e.file.readArrayBuffer;
   const lost = [];
@@ -243,7 +246,7 @@ test("lost preview callbacks are re-armed by the next request", async () => {
 });
 
 test("preview cannot publish a cancelled stale read and can resume freely", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const original = e.file.readArrayBuffer;
   let deliver;
@@ -265,7 +268,7 @@ async function until(predicate, timeout = 2000) {
 }
 
 test("a lost index callback retries once and then releases loading instead of stalling previews", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   let calls = 0;
   e.file.readText = () => { calls += 1; };
@@ -283,7 +286,7 @@ test("a lost index callback retries once and then releases loading instead of st
 });
 
 test("watchdog releases a load stalled on a missing header callback and a later load recovers", async () => {
-  const e = environment(), bytes = await image();
+  const e = environment(), bytes = png();
   begin(e, bytes, ID); chunks(e, bytes, ID); e.request({type: "image-commit", id: ID, level: 0});
   const original = e.file.readArrayBuffer;
   let disabled = true;
@@ -304,67 +307,47 @@ test("watchdog releases a load stalled on a missing header callback and a later 
   assert.equal(Buffer.from(reply.data, "base64url").length, 1536);
 });
 
-function png(size = 24, length = 300) {
-  const bytes = Buffer.alloc(length);
-  bytes.set([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82]);
-  bytes.writeUInt32BE(size, 16); bytes.writeUInt32BE(size, 20);
-  bytes.set([8, 3, 0, 0, 0], 24);
-  return bytes;
-}
-function beginPng(e, bytes, id, target) {
-  return e.request({type: "image-begin", id, level: 0, format: "png", width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20),
-    length: bytes.length, crc32: crc32(bytes).toString(16).padStart(8, "0")}, target);
-}
-
-test("PNG devices (Band 9/9 Pro) install, reload and preview PNG images", async () => {
+test("PNG images install, reload and preview", async () => {
   const e = environment(), bytes = png();
-  e.store.setFormat("png");
-  assert.equal(e.store.snapshot().format, "png");
-  assert.equal(beginPng(e, bytes, ID).success, true);
+  assert.equal(begin(e, bytes, ID).success, true);
   chunks(e, bytes, ID);
   assert.equal(e.request({type: "image-commit", id: ID, level: 0}).success, true);
   const source = e.store.source(0);
   assert.match(source, /^internal:\/\/files\/watermelon-image-image-test-00000001-0\.png$/);
   assert.deepEqual(e.files.get(source), bytes);
+  assert.equal(JSON.parse(e.files.get("internal://files/watermelon-images.json")).images[0].format, "png");
   const reboot = e.open();
-  reboot.setFormat("png");
   assert.equal(reboot.source(0), source);
   const reply = e.request({type: "image-read", id: NEXT, level: 0, offset: 0}, reboot);
   assert.equal(reply.success, true);
   assert.equal(reply.format, "png");
-  assert.deepEqual(Buffer.from(reply.data, "base64url"), bytes);
+  assert.deepEqual(Buffer.from(reply.data, "base64url"), bytes.subarray(0, 1536));
 });
 
-test("PNG devices reject .bin uploads and ignore old .bin images", async () => {
-  const e = environment(), bin = await image();
-  begin(e, bin, ID); chunks(e, bin, ID); e.request({type: "image-commit", id: ID, level: 0});
-  const old = e.store.source(0);
-  e.store.setFormat("png");
-  assert.equal(e.store.source(0), "/common/fruit-1.bin", "旧 .bin 在不支持的设备上按默认图处理");
-  assert.deepEqual(e.store.snapshot().levels, []);
-  assert.equal(e.request({type: "image-read", id: NEXT, level: 0, offset: 0}).default, true);
-  assert.equal(begin(e, bin, NEXT).error, "UNSUPPORTED_FORMAT");
-  assert.equal(e.files.has(old), true, "不能删除旧图片文件");
-  e.store.setFormat("bin");
-  assert.equal(e.store.source(0), old);
+test(".bin uploads are rejected and old .bin images fall back to the built-in PNG", async () => {
+  const e = environment();
+  const legacy = "internal://files/watermelon-image-" + ID + "-0.bin";
+  e.files.set(legacy, Buffer.alloc(1612));
+  e.files.set("internal://files/watermelon-images.json", Buffer.from(JSON.stringify({v: 1, images: {0: {id: ID, uri: legacy, width: 24, height: 24, length: 1612}}})));
+  const store = e.open();
+  assert.equal(store.source(0), "/common/fruit-1.png");
+  assert.deepEqual(store.snapshot().levels, []);
+  assert.equal(e.request({type: "image-read", id: NEXT, level: 0, offset: 0}, store).default, true);
+  assert.equal(e.files.has(legacy), false, "旧 .bin 文件当作孤儿清理");
+  const bin = {type: "image-begin", id: NEXT, level: 0, width: 24, height: 24, length: 1612, crc32: "12345678"};
+  assert.equal(e.request(bin, store).error, "UNSUPPORTED_FORMAT");
+  assert.equal(e.request({...bin, format: "bin"}, store).error, "UNSUPPORTED_FORMAT");
 });
 
 test("PNG uploads validate the signature and size limits", async () => {
   const e = environment();
-  e.store.setFormat("png");
   assert.equal(e.request({type: "image-begin", id: ID, level: 0, format: "png", width: 24, height: 24, length: 40961, crc32: "12345678"}).error, "INVALID_IMAGE");
+  assert.equal(e.request({type: "image-begin", id: ID, level: 0, format: "png", width: 24, height: 24, length: 32, crc32: "12345678"}).error, "INVALID_IMAGE");
   const bytes = png();
-  beginPng(e, bytes, ID);
+  begin(e, bytes, ID);
   const broken = Buffer.from(bytes); broken[1] = 0;
-  assert.equal(e.request({type: "image-chunk", id: ID, level: 0, offset: 0, data: broken.toString("base64url")}).error, "INVALID_IMAGE");
+  assert.equal(e.request({type: "image-chunk", id: ID, level: 0, offset: 0, data: broken.subarray(0, 1536).toString("base64url")}).error, "INVALID_IMAGE");
   const wrongSize = png(30);
-  assert.equal(beginPng(e, wrongSize, NEXT).success, true);
-  assert.equal(e.request({type: "image-chunk", id: NEXT, level: 0, offset: 0, data: png(24).toString("base64url")}).error, "INVALID_IMAGE");
-});
-
-test("bin devices also accept PNG uploads", async () => {
-  const e = environment(), bytes = png();
-  beginPng(e, bytes, ID); chunks(e, bytes, ID);
-  assert.equal(e.request({type: "image-commit", id: ID, level: 0}).success, true);
-  assert.match(e.store.source(0), /\.png$/);
+  assert.equal(begin(e, wrongSize, NEXT).success, true);
+  assert.equal(e.request({type: "image-chunk", id: NEXT, level: 0, offset: 0, data: png(24).subarray(0, 1536).toString("base64url")}).error, "INVALID_IMAGE");
 });

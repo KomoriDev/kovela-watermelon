@@ -16,7 +16,7 @@
 | --- | --- |
 | `plugin/src` | V4 UI、账号权益、本地图片转换、逐包确认传输 |
 | `plugin/wit` | 官方 V4 WIT 定义与只导入所需接口的 world |
-| `plugin/assets/skins` | 两套完整皮肤，每套 11 张 I8 资源、PNG 预览和原始资源 |
+| `plugin/assets/skins` | 两套完整皮肤，每套 11 张调色板 PNG 和原始资源 |
 | `wearable/src` | 免费通信与持久图片存储；不依赖 VelaPass 或许可证 |
 | `scripts/prepare-vela.mjs` | 为 `../watermelon/src/skin/index.js` 生成独立通信包 |
 | `scripts/prepare-skins.mjs` | 从经典 PNG 和 Q版水果 PNG 重建皮肤 |
@@ -43,11 +43,11 @@ npm run build:plugin
 
 沿用 JSON v1 的 `hello`、`image-begin/chunk/commit/reset/read` 协议，手环握手明确返回 `images.freeTransfer=true`。旧固件没有此标记时插件提示更新，避免把旧的授权限制误当作新功能。每块 1536 字节、每张最多 40 KiB，CRC32 校验成功后提交图片及索引；失败保留原图片，重试继续当前水果。整套换肤按水果依次提交，中途结束会保留已经完成的水果。
 
-插件支持 PNG、JPEG、WebP、BMP、GIF 首帧，自动校正方向、居中裁剪、圆形透明遮罩与 I8 量化。输入上限 8 MiB、边长上限 8192、解码内存上限 64 MiB。
+插件支持 PNG、JPEG、WebP、BMP、GIF 首帧，自动校正方向、居中裁剪、圆形透明遮罩，量化为 255 色加透明色后编码为 8 位调色板 PNG。输入上限 8 MiB、边长上限 8192、解码内存上限 64 MiB。
 
-小米手环 9/9 Pro 不支持 LVGL v9 `.bin`。游戏启动时用一张 1×1 探测图判断，握手回复 `images.format`：`png` 表示只能显示 PNG，缺省或 `bin` 按原方式处理。对 `png` 设备，插件把整套皮肤和自定义图片先量化成同一份 I8 调色板，再无损编码为 8 位调色板 PNG（像素与 `.bin` 一致，同样不超过 40 KiB），`image-begin` 带 `format: "png"`；预览回读的 `image-preview` 也带 `format`。`png` 设备拒绝不带格式的 `.bin` 上传（`UNSUPPORTED_FORMAT`），旧的 `.bin` 自定义图在这类设备上按默认图处理但不删除。`.bin` 设备也能接收和显示 PNG。
+所有图片统一使用调色板 PNG：LVGL v9 `.bin` 在小米手环 9/9 Pro 等设备上无法显示，所以游戏内置图、两套皮肤和自定义图片都不再使用 `.bin`。`image-begin` 必须带 `format: "png"`，否则手环返回 `UNSUPPORTED_FORMAT`；预览回读的 `image-preview` 固定带 `format: "png"`，插件拒绝预览其他格式。握手仍回复 `images.format: "png"`，让 1.2.1 之前的旧插件也发 PNG。
 
-手环继续使用 `internal://files/watermelon-images.json` 和 `watermelon-image-<id>-<level>.bin`（PNG 为 `.png`，索引条目带 `format: "png"`），已有图片无需迁移。索引加载、预览回读、迟到回调与中断文件回收保留原来的恢复逻辑。
+手环使用 `internal://files/watermelon-images.json` 和 `watermelon-image-<id>-<level>.png`，索引条目带 `format: "png"`。旧版本留下的 `.bin` 自定义图会按默认图显示，并在下次加载时当作孤立文件删除，需要重新应用一次。索引加载、预览回读、迟到回调与中断文件回收保留原来的恢复逻辑。
 
 插件不向手环推送任何通知（真机上 AstroBox 推送的通知会让手环整机重启），传输进度、失败原因与完成状态只在插件页显示。
 
