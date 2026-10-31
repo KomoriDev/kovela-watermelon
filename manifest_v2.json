@@ -3,14 +3,16 @@
     "id": "com.komoridev.watermelon",
     "restype": "quick_app",
     "name": "合成大西瓜",
-    "description": "合成大西瓜\n\n为小米穿戴设备定制的合成大西瓜游戏，完美适配各个设备比例。共 11 种水果，空间有限，需要规划落点、制造连击，避免溢出。",
+    "description": "## 合成大西瓜\n\n为小米穿戴设备定制的合成大西瓜游戏，完美适配各个设备比例。共 11 种水果，空间有限，需要规划落点、制造连击，避免溢出。\n\n- **随时可停**：点右上角暂停。退回首页或切到后台都会自动存档，下次接着玩。\n- **签到领金币**：每天签到领金币，连签 7 天额外送一个小锤子。\n- **三种道具**：\n  - 换一换：换掉手上要放的水果\n  - 小锤子：敲掉最高的一个水果\n  - 清小果：清掉场上所有葡萄和樱桃\n- **水果换肤**：通过『合成大西瓜自定义工具』更换水果皮肤 ~~（实则智商检测器~~\n\n> 💡 **防重启小技巧：** 玩一段时间点击暂停，返回首页再重进游戏。进度会保留，也能避开重启。",
     "preview": [
+      "media/cover.png",
+      "media/view.png",
       "media/screenshot1.png",
       "media/screenshot2.png",
       "media/screenshot3.png"
     ],
     "icon": "media/logo.png",
-    "cover": "media/容器 1.png",
+    "cover": "media/cover.png",
     "author": [
       {
         "name": "KomoriDev",
@@ -32,10 +34,14 @@
   ],
   "downloads": {
     "xmb10": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -59,10 +65,14 @@
       ]
     },
     "xmb10nfc": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -86,10 +96,14 @@
       ]
     },
     "xmb10p": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -113,10 +127,14 @@
       ]
     },
     "xmb11": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -140,10 +158,14 @@
       ]
     },
     "xmb11nfc": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -167,10 +189,14 @@
       ]
     },
     "xmb9": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -194,10 +220,14 @@
       ]
     },
     "xmb9p": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -221,10 +251,14 @@
       ]
     },
     "xmrw6": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -248,10 +282,14 @@
       ]
     },
     "xmrw5": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -275,10 +313,14 @@
       ]
     },
     "xmrw5xring": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -302,10 +344,14 @@
       ]
     },
     "xmws5": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -329,10 +375,14 @@
       ]
     },
     "xmws541": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -356,10 +406,14 @@
       ]
     },
     "xmws4": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -383,10 +437,14 @@
       ]
     },
     "xmws441": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -410,10 +468,14 @@
       ]
     },
     "xmws4xring": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
@@ -437,10 +499,14 @@
       ]
     },
     "xmws3": {
-      "version": "1.2.1",
-      "file_name": "downloads/com.komoridev.watermelon.release.1.2.1.rpk",
-      "versionCode": 5,
+      "version": "1.3.0",
+      "file_name": "downloads/com.komoridev.watermelon.release.1.3.0.rpk",
+      "versionCode": 6,
       "updatelogs": [
+        {
+          "version": "1.3.0",
+          "content": "💡 防重启冷知识：游戏过程中点击暂停 -> 返回首页 -> 重进游戏可规避重启\n\n- 🚑️ 水果图片格式换回 `.png`\n- 🐛 修复水果皮肤偶尔在自定义图和默认图之间来回切换\n- 💄 暂停改为全屏页面\n- ✨ 新增每日签到和道具系统\n- 💄 “更多” 页重新排版"
+        },
         {
           "version": "1.2.1",
           "content": "- 🐛 修复小米手环 9/9 Pro 打开后黑屏\n- 🐛 修复小米手环 9/9 Pro 水果不显示：不支持 `.bin` 的设备自动改用 PNG\n- ✨ 小米手环 9/9 Pro 支持换肤，插件自动传输 PNG 图片\n- ⚡️ 首页不再等待水果图片加载，启动更快"
