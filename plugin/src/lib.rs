@@ -147,8 +147,18 @@ fn device_section(s: &State, busy: bool) -> ui::Element {
         } else {
             "点击「连接」后，手环会自动打开换肤页面；如果没有打开，请在手环的合成大西瓜中进入「设置 > 水果换肤」。需要合成大西瓜 1.2.0 或更高版本。"
         }));
+        section = section.child(ios_hint());
     }
     section
+}
+/// iOS 上小米运动健康会和 AstroBox 抢手环的蓝牙连接，连不上时多半是它占着。
+fn ios_hint() -> ui::Element {
+    view::panel()
+        .gap(4)
+        .child(view::text("iOS 连接提示"))
+        .child(view::label(
+            "小米运动健康会和 AstroBox 抢占手环的蓝牙连接。请打开 iPhone「设置」，找到「小米运动健康」，关闭其中的「蓝牙」权限，然后在后台划掉小米运动健康，再回到 AstroBox 连接手环。",
+        ))
 }
 /// 进度、结果与错误统一放在页面顶部，点完上方按钮也能立刻看到反馈。
 fn status_section(s: &State) -> Option<ui::Element> {
